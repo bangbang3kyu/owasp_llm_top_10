@@ -1,4 +1,4 @@
-# OWASP LLM Top 10 CTF (Gemini 연동판)
+# OWASP LLM Top 10 testCTF
 
 이제 각 레벨의 챗봇은 **실제 Google Gemini API**를 호출합니다. 로컬 키워드 매칭이
 아니라, 진짜 모델이 취약한 시스템 프롬프트/플러그인을 뚫리는지 판단합니다.
