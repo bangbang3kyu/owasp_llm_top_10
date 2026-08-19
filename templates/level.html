@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP LLM CTF - Level {{ level }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="cyber-bg">
+    <div class="container">
+        <header>
+            <button id="settings-btn" class="settings-btn" type="button">⚙ API KEY</button>
+            <h1 class="glitch" data-text="OWASP LLM TOP 10 CTF">OWASP LLM TOP 10 CTF</h1>
+            <div class="progress-bar">
+                {% for i in range(1, 11) %}
+                    <a href="/llm/{{ i }}" class="step {% if i == level %}active{% elif i <= unlocked %}unlocked{% else %}locked{% endif %}">
+                        {{ i }}
+                    </a>
+                {% endfor %}
+            </div>
+        </header>
+
+        <div id="settings-modal" class="modal-overlay hidden">
+            <div class="modal-box">
+                <h3>GEMINI API KEY</h3>
+                <p class="modal-desc">
+                    이 CTF는 실제 DeepSeek API KEY를 호출합니다. 아래에 발급받은 키를 입력하세요.
+                    키는 서버 세션에만 저장되며 브라우저로 다시 전송되지 않습니다.
+                    <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">키 발급받기 →</a>
+                </p>
+                <input type="password" id="api-key-input" placeholder="AIza...">
+                <div class="modal-actions">
+                    <button id="save-key-btn">SAVE</button>
+                    <button id="clear-key-btn" class="secondary">CLEAR</button>
+                    <button id="close-modal-btn" class="secondary">CLOSE</button>
+                </div>
+                <div id="key-status-msg"></div>
+            </div>
+        </div>
+
+        <main>
+            <section class="challenge-info">
+                <h2>Level {{ level }}: {{ info.title }}</h2>
+                <p class="mission-desc">{{ info.desc }}</p>
+            </section>
+
+            <section class="chat-interface">
+                <div id="chat-box" class="chat-box">
+                    <div class="message bot">
+                        <span class="sender">SYSTEM:</span>
+                        <p>Welcome, operative. I am the Level {{ level }} security model. How may I assist you?</p>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Type your payload..." autocomplete="off">
+                    <button id="send-btn">SEND</button>
+                </div>
+            </section>
+
+            <section class="flag-submission">
+                <div class="flag-input-group">
+                    <input type="text" id="flag-input" placeholder="FLAG{...}">
+                    <button id="verify-btn">VERIFY FLAG</button>
+                </div>
+                <div id="status-msg"></div>
+                <button id="next-btn" class="hidden">PROCEED TO NEXT LEVEL >></button>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        const CURRENT_LEVEL = {{ level }};
+    </script>
+</body>
+</html>
